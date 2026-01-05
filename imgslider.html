@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            overflow: hidden;
+        }
+        .sec {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 250px;
+        }
+
+        .spns {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        img {
+            width: 400px;
+            height: 400px;
+            border-radius: 10px;
+        }
+
+        .i {
+            display: none;
+        }
+
+        span {
+            background-color: #ddd;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 20px;
+        }
+
+        #pre,
+        #nxt {
+            user-select: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="sec">
+        <div class="con">
+            <div class="imgs">
+                <img id="i1" src="../earth.jpeg" alt="Earth Image">
+                <img class="i" id="i2" src="../google.jpeg" alt="Google Image">
+                <img class="i" id="i3" src="../OIP (10).jpeg" alt="Dragon Image">
+                <img class="i" id="i4" src="../OIP (11).jpeg" alt="Dragon Image">
+                <img class="i" id="i5" src="../OIP (12).jpeg" alt="Dragon Image">
+            </div>
+            <div class="spns">
+                <span id="pre">&lt;</span>
+                <span id="nxt">&gt;</span>
+            </div>
+        </div>
+    </section>
+    <!-- <script>
+        const images = [
+            {id: "i1"},
+            {id: "i2"},
+            {id: "i3"},
+            {id: "i4"},
+            {id: "i5"}
+        ]
+        let current = 0, c = 0
+        const previous = document.getElementById("pre")
+        const next = document.getElementById("nxt")
+        previous.style.cursor = "pointer"
+        next.style.cursor = "pointer"
+        previous.style.userSelect = "none"
+        next.style.userSelect = "none"
+        previous.addEventListener("click", _ => {
+            if(c === 4)
+                current = 0
+            if(current >= images.length - 1){
+                c = 0
+                return
+            }
+            document.getElementById(images[current].id).style.display = "none"
+            current++
+            document.getElementById(images[current].id).style.display = "block"
+            c++
+        })
+        let current2 = 4, c2 = 0
+        next.addEventListener("click", _ => {
+            if(c2 === 4)
+                current2 = 4
+            if(current2 <= 0){
+                c2 = 0
+                return
+            }
+            document.getElementById(images[current2].id).style.display = "none"
+            current2--
+            document.getElementById(images[current2].id).style.display = "block"
+            c2++
+        })
+    </script> -->
+    <script>
+        const images = ["i1", "i2", "i3", "i4", "i5"];
+        let current = 0, c = 0;
+
+        const prev = document.getElementById("pre");
+        const next = document.getElementById("nxt");
+
+        function showImage(index) {
+            images.forEach(id => {
+                if (c === Number(id.slice(1))) {
+                    document.getElementById(id).style.transition = "0.3s";
+                    document.getElementById(id).style.transform = "translateX(300%)";
+                    if(c === 4) c++
+                }
+            })
+            setTimeout(() => {
+                images.forEach(id => {
+                    document.getElementById(id).style.display = "none";
+                });
+            }, 300)
+            setTimeout(() => {
+                document.getElementById(images[index]).style.transition = "0.3s";
+                document.getElementById(images[index]).style.display = "block";
+                document.getElementById(images[index]).style.transform = "translateX(-300%)";
+                setTimeout(() => {
+                    document.getElementById(images[index]).style.transform = "translateX(0%)";
+                }, 300)
+            }, 300)
+        }
+
+        prev.onclick = () => {
+            current--;
+            c = current
+            if (current < 0) current = images.length - 1;
+            showImage(current);
+        };
+
+        next.onclick = () => {
+            current++;
+            c = current
+            if (current >= images.length) current = 0;
+            showImage(current);
+        };
+    </script>
+
+</body>
+
+</html>

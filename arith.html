@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        .sec {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .con {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background-color: hsl(202, 100%, 50%);
+            padding: 50px;
+            margin-top: 250px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        input {
+            padding: 10px;
+            width: 300px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+        }
+
+        input:focus {
+            border: 2px solid rgb(0, 255, 0);
+        }
+
+        button {
+            padding: 10px;
+            color: white;
+            border-radius: 20px;
+            width: 100px;
+            border: none;
+            margin: 10px;
+            cursor: pointer;
+            transition: 1s;
+        }
+
+        .add {
+            background-color: rgb(1, 254, 1);
+            color: black;
+        }
+
+        .sub {
+            background-color: red;
+        }
+
+        .mul {
+            background-color: yellow;
+            color: black;
+        }
+
+        .div {
+            background-color: violet;
+        }
+
+        .add:hover {
+            background-color: rgb(1, 205, 1);
+        }
+
+        .sub:hover {
+            background-color: rgb(206, 1, 1);
+        }
+
+        .mul:hover {
+            background-color: rgb(215, 215, 1);
+        }
+
+        .div:hover {
+            background-color: rgb(199, 109, 199);
+        }
+    </style>
+</head>
+
+<body>
+    <section class="sec">
+        <div class="con">
+            <h1>Arithmetic Operations</h1>
+            <input id="n1" type="number" placeholder="Enter the first number"><br>
+            <input id="n2" type="number" placeholder="Enter the second number"><br>
+            <div>
+                <button class="add">Add</button>
+                <button class="sub">Sub</button>
+                <button class="mul">Mul</button>
+                <button class="div">Div</button>
+            </div>
+            <p style="font-size: 30px;"></p>
+        </div>
+    </section>
+    <script>
+        const n1 = document.getElementById("n1")
+        const n2 = document.getElementById("n2")
+        const btns = document.querySelectorAll("button")
+        const p = document.querySelector("p")
+        btns.forEach(btn => {
+            if (btn.classList.value === "add") {
+                btn.addEventListener("click", _ => {
+                    if (n1.value !== "" && n2.value !== "") {
+                        p.textContent = `Result: ${Number(n1.value) + Number(n2.value)}`
+                        p.style.color = "white"
+                    } else {
+                        p.textContent = "Please fill out the numbers!"
+                        p.style.color = "red"
+                    }
+                })
+            }
+            if (btn.classList.value === "sub") {
+                btn.addEventListener("click", _ => {
+                    if (n1.value !== "" && n2.value !== "") {
+                        p.textContent = `Result: ${Number(n1.value) - Number(n2.value)}`
+                        p.style.color = "white"
+                    } else {
+                        p.textContent = "Please fill out the numbers!"
+                        p.style.color = "red"
+                    }
+                })
+            }
+            if (btn.classList.value === "mul") {
+                btn.addEventListener("click", _ => {
+                    if (n1.value !== "" && n2.value !== "") {
+                        p.textContent = `Result: ${Number(n1.value) * Number(n2.value)}`
+                        p.style.color = "white"
+                    } else {
+                        p.textContent = "Please fill out the numbers!"
+                        p.style.color = "red"
+                    }
+                })
+            }
+            if (btn.classList.value === "div") {
+                btn.addEventListener("click", _ => {
+                    if (n1.value !== "" && n2.value !== "") {
+                        try {
+                            let a = Number(n1.value)
+                            let b = Number(n2.value)
+                            if (b === 0)
+                                throw new Error("Can't divide by zero!")
+                            let c = a / b
+                            p.textContent = `Result: ${c}`
+                            p.style.color = "white"
+                        } catch (error) {
+                            p.textContent = error.message
+                            p.style.color = "red"
+                        }
+                    } else {
+                        p.textContent = "Please fill out the numbers!"
+                        p.style.color = "red"
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: black;
+        }
+        .star{
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            z-index: -1;
+        }
+         #todocon{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100px;
+         }
+         #todo{
+            width: 500px;
+            height: 200px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #c4e538;
+            background-color: transparent;
+            transform: scale(1.2);
+            position: relative;
+         }
+         #tdlh1{
+            color: white;
+            margin-top: 10px;
+            margin-bottom: 10px;
+         }
+         #addinp{
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+         }
+         #addinp:focus{
+            border: 1px solid violet;
+         }
+         #add{
+            background-color: rgb(2, 253, 2);
+            padding: 8px;
+            border: 1px solid tomato;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 1s linear;
+            margin-top: 10px;
+         }
+         #add:hover{
+            background-color: rgb(2, 210, 2);
+            border: 1px solid blue;
+         }
+        .layer{
+            background-color: #c4e538;
+            width: 0%;
+            height: 100%;
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: 0.5s;
+        }
+        #todo:focus-within,
+        #todo:focus-within #tdlh1{
+            border: none;
+            color: black;
+        }
+        #todo:focus-within .layer{
+            width: 100%;
+        }
+  </style>
+</head>
+<body>
+  <div id="todocon">
+        <div id="todo">
+            <span class="layer"></span>
+            <h1 id="tdlh1">To-Do List</h1>
+            <input id="addinp" type="text" placeholder="Add a new task">
+            <button id="add">Add Task</button>
+        </div>
+    </div>
+    <script src="todo.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: linear-gradient(to bottom right, lightgreen, tomato, pink, yellow);
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .sec{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 150px;
+        }
+        .qcon,
+        .qc{
+            background-color: orange;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ddd;
+            margin-top: 10px;
+        }
+        .qc{
+            width: 500px;
+        }
+        #lb {
+            display: flex;
+            border-radius: 10px;
+            background-color: #ddd;
+        }
+
+        #lc {
+            display: flex;
+            border: 5px solid violet;
+            border-radius: 10px;
+            width: 0%;
+        }
+
+        #q2,
+        #q3,
+        #q4,
+        #q5 {
+            display: none;
+        }
+        #result{
+            width: 500px;
+            height: 350px;
+            display: none;
+            border: 1px solid blue;
+            border-radius: 10px;
+            background-color: lightgreen;
+        }
+        #result h1,
+        .qa{
+            text-align: center;
+        }
+        #nxt,
+        #rq{
+            background-color: hsl(194, 100%, 50%);
+            color: white;
+            transition: 1s;
+            padding: 10px;
+            width: 100%;
+            border-radius: 20px;
+            border: none;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        #rq{
+            display: none;
+        }
+        #nxt:hover,
+        #rq:hover{
+            background-color: hsl(149, 97%, 49%);
+            color: black;
+        }
+        .qc input[type = "radio"]{
+            cursor: pointer;
+        }
+        h1{
+            color: white;
+            margin-bottom: 20px;
+        }
+        .qc h2,
+        .qc label{
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="sec">
+    <div class="qcon">
+        <div class="qh">
+            <h1 class="qa">Quiz Application</h1>
+            <span id="lb"><span id="lc"></span></span>
+        </div>
+        <div id="q1">
+            <div class="qc">
+                <h2>Question 1: What is the capital of France?</h2>
+                <input type="radio" name="q1" id="q1a1"><label for="q1a1">Berlin</label><br>
+                <input type="radio" name="q1" id="q1a2"><label for="q1a2">Madrid</label><br>
+                <input type="radio" name="q1" id="q1a3"><label id="ql3" for="q1a3">Paris</label><br>
+                <input type="radio" name="q1" id="q1a4"><label for="q1a4">Rome</label><br>
+            </div>
+        </div>
+        <div id="q2">
+            <div class="qc">
+                <h2>Question 2: What is 2 + 2?</h2>
+                <input type="radio" name="q2" id="q2a1"><label for="q2a1">3</label><br>
+                <input type="radio" name="q2" id="q2a2"><label id="ql2" for="q2a2">4</label><br>
+                <input type="radio" name="q2" id="q2a3"><label for="q2a3">5</label><br>
+                <input type="radio" name="q2" id="q2a4"><label for="q2a4">6</label><br>
+            </div>
+        </div>
+        <div id="q3">
+            <div class="qc">
+                <h2>Question 3: Which planet is known as the Red Planet?</h2>
+                <input type="radio" name="q3" id="q3a1"><label for="q3a1">Earth</label><br>
+                <input type="radio" name="q3" id="q3a2"><label for="q3a2">Venus</label><br>
+                <input type="radio" name="q3" id="q3a3"><label for="q3a3">Mars</label><br>
+                <input type="radio" name="q3" id="q3a4"><label for="q3a4">Jupiter</label><br>
+            </div>
+        </div>
+        <div id="q4">
+            <div class="qc">
+                <h2>Question 4: What is the largest ocean on Earth?</h2>
+                <input type="radio" name="q4" id="q4a1"><label for="q4a1">Atlantic Ocean</label><br>
+                <input type="radio" name="q4" id="q4a2"><label for="q4a2">Indian Ocean</label><br>
+                <input type="radio" name="q4" id="q4a3"><label for="q4a3">Arctic Ocean</label><br>
+                <input type="radio" name="q4" id="q4a4"><label for="q4a4">Pacific Ocean</label><br>
+            </div>
+        </div>
+        <div id="q5">
+            <div class="qc">
+                <h2>Question 5: Who wrote 'Romeo and Juliet'?</h2>
+                <input type="radio" name="q5" id="q5a1"><label for="q5a1">Charles Dickens</label><br>
+                <input type="radio" name="q5" id="q5a2"><label for="q5a2">Mark Twain</label><br>
+                <input type="radio" name="q5" id="q5a3"><label for="q5a3">William Shakespeare</label><br>
+                <input type="radio" name="q5" id="q5a4"><label for="q5a4">Jane Austen</label><br>
+            </div>
+        </div>
+        <div id="result"></div>
+        <button id="nxt">Next Question</button>
+        <button id="rq">Restart Quiz</button>
+    </div>
+    </section>
+    <!-- <script>
+        const nextBtn = document.getElementById('nxt')
+        const lc = document.getElementById('lc')
+        Array.from(document.getElementsByClassName('qc')).forEach((element) => {
+            element.querySelectorAll('input[type="radio"]').forEach((radio) => {
+                radio.addEventListener('change', () => {
+                    element.querySelectorAll('input[type="radio"]').forEach((radio) => {
+                        if(!radio.checked)
+                            radio.disabled = true
+                    })
+                    if(radio.id === "q1a3"){
+                        document.getElementById('ql3').style.color = 'green';
+                    }
+                    if(radio.id === "q1a2"){
+                        document.querySelector('#q1 label[for="q1a2"]').style.color = 'red';
+                    }
+                    if(radio.id === "q1a4"){
+                        document.querySelector('#q1 label[for="q1a4"]').style.color = 'red';
+                    }
+                    if(radio.id === "q1a1"){
+                        document.querySelector('#q1 label[for="q1a1"]').style.color = 'red';
+                    }
+                });
+            });
+        })
+        nextBtn.addEventListener('click', () => {
+            Array.from(document.getElementsByClassName('qc')).forEach((element) => {
+            element.querySelectorAll('input[type="radio"]').forEach((radio) => {
+                radio.disabled = false
+            })
+            Array.from(document.getElementsByClassName('qc')).forEach((element) => {
+            element.querySelectorAll('input[type="radio"]').forEach((radio) => {
+                radio.addEventListener('change', () => {
+                    element.querySelectorAll('input[type="radio"]').forEach((radio) => {
+                        if(!radio.checked)
+                            radio.disabled = true
+                    })
+                    if(radio.id === "q2a2"){
+                        document.getElementById('ql2').style.color = 'green';
+                    }
+                    if(radio.id === "q2a3"){
+                        document.querySelector('#q2 label[for="q2a3"]').style.color = 'red';
+                    }
+                    if(radio.id === "q2a4"){
+                        document.querySelector('#q2 label[for="q2a4"]').style.color = 'red';
+                    }
+                    if(radio.id === "q2a1"){
+                        document.querySelector('#q2 label[for="q2a1"]').style.color = 'red';
+                    }
+                });
+            });
+        })
+    })
+            lc.style.transition = 'all 0.1s linear'
+            lc.style.width = '25%'
+            document.getElementById('q1').style.display = 'none';
+            document.getElementById('q2').style.display = 'block';
+            nextBtn.addEventListener('click', () => {
+                lc.style.transition = 'all 0.1s linear'
+                setTimeout(() => {
+                    lc.style.width = '50%'
+                }, 100);
+                document.getElementById('q2').style.display = 'none';
+                document.getElementById('q3').style.display = 'block';
+                nextBtn.addEventListener('click', () => {
+                    lc.style.transition = 'all 0.1s linear'
+                    setTimeout(() => {
+                        lc.style.width = '75%'
+                    }, 100);
+                    document.getElementById('q3').style.display = 'none';
+                    document.getElementById('q4').style.display = 'block';
+                    nextBtn.addEventListener('click', () => {
+                        lc.style.transition = 'all 0.1s linear'
+                        setTimeout(() => {
+                            lc.style.width = '100%'
+                        }, 100);
+                        document.getElementById('q4').style.display = 'none';
+                        document.getElementById('q5').style.display = 'block';
+                    });
+                });
+            });
+        });
+    </script> -->
+    <script>
+        const questions = [
+            { id: "q1", correct: "q1a3" },
+            { id: "q2", correct: "q2a2" },
+            { id: "q3", correct: "q3a3" },
+            { id: "q4", correct: "q4a4" },
+            { id: "q5", correct: "q5a3" }
+        ];
+
+        let current = 0, c = 0, n = 0;
+        const nextBtn = document.getElementById("nxt");
+        const lc = document.getElementById("lc");
+
+        // Handle answer selection
+        document.addEventListener("change", (e) => {
+            if (e.target.type !== "radio") return;
+
+            const qDiv = e.target.closest(".qc");
+            const radios = qDiv.querySelectorAll("input[type=radio]");
+
+            radios.forEach(r => r.disabled = true);
+
+            const label = document.querySelector(`label[for="${e.target.id}"]`);
+            label.textContent +=
+                e.target.id === questions[current].correct ? "✅" : "❌";
+                e.target.id === questions[current].correct ? c++ : 0
+        });
+
+        // Handle Next button
+        nextBtn.addEventListener("click", () => {
+            if(current === 3)
+                nextBtn.textContent = "Final Score"
+            if (n === 4) {
+                document.getElementById(questions[current].id).style.display = "none";
+                const div = document.getElementById("result")
+                div.style.display = "block"
+                div.style.marginTop = "10px"
+                const h1 = document.createElement("h1")
+                h1.style.marginTop = "80px"
+                div.appendChild(h1)
+                h1.innerText = `${c}/5\n
+                Your Score: ${c}\n
+                Percentage: ${c * 20}%`
+                n = 0
+                nextBtn.style.display = "none"
+                document.getElementById("rq").style.display = "block"
+            }
+            if (current >= questions.length - 1) return;
+
+            document.getElementById(questions[current].id).style.display = "none";
+            current++;
+            n++
+
+            document.getElementById(questions[current].id).style.display = "block";
+
+            lc.style.width = `${(current / (questions.length - 1)) * 100}%`;
+            lc.style.transition = "0.5s"
+        });
+        document.getElementById("rq").addEventListener("click", _ => {
+            lc.style.width = "0%"
+            setTimeout(() => {
+                location.reload()
+            }, 500)
+        })
+    </script>
+
+</body>
+
+</html>

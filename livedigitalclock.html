@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-color: black;
+        }
+        .sec{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .con{
+            background-color: hsl(210, 100%, 50%);
+            color: white;
+            padding: 50px;
+            font-size: 50px;
+            margin-top: 250px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <section class="sec">
+        <div class="con">
+            <h1></h1>
+        </div>
+    </section>
+    <script>
+        const h1 = document.querySelector("h1")
+        setInterval(() => {
+            const date = new Date()
+            h1.textContent = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        }, 1000)
+    </script>
+</body>
+</html>

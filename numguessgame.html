@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: black;
+        }
+
+        .sec {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 250px;
+        }
+
+        .con {
+            background: linear-gradient(to bottom right, rgb(1, 255, 1), orange, violet);
+            padding: 50px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            transform: scale(1.5);
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        input {
+            width: 200px;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            margin-top: 20px;
+            border: none;
+            outline: none;
+        }
+
+        input:focus {
+            border: 2px solid rgb(0, 128, 255);
+        }
+
+        #guess {
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            background-color: hsl(213, 100%, 50%);
+            color: white;
+            cursor: pointer;
+        }
+
+        #guess:hover {
+            background-color: hsl(213, 98%, 42%);
+        }
+    </style>
+</head>
+
+<body>
+    <section class="sec">
+        <div class="con">
+            <h1>Number Guessing Game</h1>
+            <h2>Range 1 - 100</h2>
+            <input type="number" placeholder="Enter a number" min="1" max="100">
+            <button id="guess">Guess</button>
+            <p id="cor" style="font-size: 30px; margin-top: 20px;"></p>
+            <p id="att" style="font-size: 30px; margin-top: 20px; color: white;"></p>
+        </div>
+    </section>
+    <script>
+        let c = 0
+        const guess = document.getElementById("guess")
+        const inp = document.querySelector("input")
+        let rn = Number((Math.random() * 100).toFixed(0))
+        const cor = document.getElementById("cor")
+        const att = document.getElementById("att")
+        cor.style.transition = "0.2s"
+        att.style.transition = "0.2s"
+        guess.addEventListener("click", _ => {
+            let n = Number(inp.value)
+            if (n !== 0) {
+                if (n >= 1 && n <= 100) {
+                    if (n === rn) {
+                        cor.textContent = `Correct, You guessed it, That is ${n}🔥`
+                        cor.style.color = "green"
+                        cor.style.transform = "scale(0)"
+                        att.style.transform = "scale(0)"
+                        setTimeout(() => {
+                            cor.style.transform = "scale(1.5)"
+                            att.style.transform = "scale(1.5)"
+                        }, 200)
+                        setTimeout(() => {
+                            cor.style.transform = "scale(1)"
+                            att.style.transform = "scale(1)"
+                        }, 400)
+                        att.textContent = `Attempts: ${c}`
+                    }
+                    if (n < rn) {
+                        cor.textContent = "Too low!"
+                        cor.style.color = "red"
+                        cor.style.transform = "scale(0)"
+                        setTimeout(() => {
+                            cor.style.transform = "scale(1.5)"
+                        }, 200)
+                        setTimeout(() => {
+                            cor.style.transform = "scale(1)"
+                        }, 400)
+                        c++
+                    }
+                    if (n > rn) {
+                        cor.textContent = "Too high!"
+                        cor.style.color = "red"
+                        cor.style.transform = "scale(0)"
+                        setTimeout(() => {
+                            cor.style.transform = "scale(1.5)"
+                        }, 200)
+                        setTimeout(() => {
+                            cor.style.transform = "scale(1)"
+                        }, 400)
+                        c++
+                    }
+                } else {
+                    cor.textContent = "Please enter a number between 1 and 100!"
+                    cor.style.color = "red"
+                    cor.style.transform = "scale(0)"
+                    setTimeout(() => {
+                        cor.style.transform = "scale(1.5)"
+                    }, 200)
+                    setTimeout(() => {
+                        cor.style.transform = "scale(1)"
+                    }, 400)
+                }
+            } else {
+                cor.textContent = "Please enter a number!"
+                cor.style.color = "red"
+                cor.style.transform = "scale(0)"
+                setTimeout(() => {
+                    cor.style.transform = "scale(1.5)"
+                }, 200)
+                setTimeout(() => {
+                    cor.style.transform = "scale(1)"
+                }, 400)
+            }
+        })
+    </script>
+</body>
+
+</html>

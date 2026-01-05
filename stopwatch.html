@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .con {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: scale(2);
+        }
+
+        #time {
+            padding: 20px;
+            color: white;
+            border-radius: 10px;
+            background-color: hsl(210, 100%, 50%);
+        }
+        .btns{
+            margin-top: 10px;
+        }
+        button{
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        #start{
+            background-color: rgb(3, 252, 3);
+        }
+        #pause{
+            color: white;
+            background-color: red;
+        }
+        #reset{
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con">
+        <div>
+            <h1 id="time">00:00:00</h1>
+        </div>
+        <div class="btns">
+            <button id="start">Start</button>
+            <button id="pause">Pause</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    <script>
+        const start = document.getElementById("start")
+        const pause = document.getElementById("pause")
+        const reset = document.getElementById("reset")
+        const time = document.getElementById("time")
+        let hours = 0, ht = '0'
+        let mins = 0, mt = '0'
+        let secs = 0, st = '0'
+        let h = "00", m = "00", s = "00"
+        let intervalId = 0
+        start.addEventListener("click", _ => {
+            intervalId = setInterval(() => {
+                time.textContent = `${h}:${m}:${s}`
+                s = st + ++secs
+                if(secs === 9)
+                    st = ''
+                if(secs === 60){
+                    secs = 0
+                    st = '0'
+                    s = st + secs
+                    m = mt + ++mins
+                }
+                if(mins === 9)
+                    mt = ''
+                if(mins === 60){
+                    mins = 0
+                    mt = '0'
+                    m = mt + mins
+                    h = ht + ++hours
+
+                }
+                if(hours === 9)
+                    ht = ''
+                if(hours === 24){
+                    hours = 0
+                    ht = '0'
+                    h = ht + hours
+                }
+            }, 1000)
+        })
+        pause.addEventListener("click", _ => {
+            clearInterval(intervalId)
+            time.textContent = `${h}:${m}:${s}`
+        })
+        reset.addEventListener("click", _ => {
+            clearInterval(intervalId)
+            h = "00", m = "00", s = "00"
+            hours = 0, mins = 0, secs = 0
+            ht = '0', mt = '0', st = '0'
+            time.textContent = `${h}:${m}:${s}`
+        })
+    </script>
+</body>
+
+</html>

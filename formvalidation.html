@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .sec {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .frm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input{
+            margin: 10px 0;
+            padding: 10px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+        input:focus{
+            border: 2px solid rgb(2, 255, 2);
+        }
+        input[type="submit"] {
+            width: 100px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <section class="sec">
+        <form class="frm" action="formvalidation.html">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <br><br>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <br><br>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+    <script>
+        const form = document.querySelector('.frm');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation
+            if (username.length < 3) {
+                alert('Username must be at least 3 characters long.');
+                return;
+            }
+
+            const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!email.match(emailPattern)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            if (password.length < 6 || !/\d/.test(password) || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                alert('Password must be at least 6 characters long and contain a number and a special character.');
+                return;
+            }
+
+            alert('Form submitted successfully!');
+            // Here you can add code to actually submit the form data
+        });
+    </script>
+</body>
+</html>
