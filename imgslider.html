@@ -6,18 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        body{
+
+        body {
             overflow: hidden;
+            background-color: black;
         }
+
         .sec {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 250px;
+            margin-top: 100px;
         }
 
         .spns {
@@ -29,6 +32,7 @@
             width: 400px;
             height: 400px;
             border-radius: 10px;
+            box-shadow: 0 0 15px white;
         }
 
         .i {
@@ -54,11 +58,11 @@
     <section class="sec">
         <div class="con">
             <div class="imgs">
-                <img id="i1" src="../earth.jpeg" alt="Earth Image">
-                <img class="i" id="i2" src="../google.jpeg" alt="Google Image">
-                <img class="i" id="i3" src="../OIP (10).jpeg" alt="Dragon Image">
-                <img class="i" id="i4" src="../OIP (11).jpeg" alt="Dragon Image">
-                <img class="i" id="i5" src="../OIP (12).jpeg" alt="Dragon Image">
+                <img id="i1" src="https://picsum.photos/400/400" alt="Earth Image">
+                <img class="i" id="i2" src="https://picsum.photos/400/400?image=10" alt="Google Image">
+                <img class="i" id="i3" src="https://picsum.photos/400/400?image=20" alt="Dragon Image">
+                <img class="i" id="i4" src="https://picsum.photos/400/400?image=30" alt="Dragon Image">
+                <img class="i" id="i5" src="https://picsum.photos/400/400?image=40" alt="Dragon Image">
             </div>
             <div class="spns">
                 <span id="pre">&lt;</span>
@@ -107,16 +111,16 @@
             c2++
         })
     </script> -->
-    <script>
+    <!-- <script>
         const images = ["i1", "i2", "i3", "i4", "i5"];
-        let current = 0, c = 0;
+        let current = 0, c = 0, c2 = 0;
 
         const prev = document.getElementById("pre");
         const next = document.getElementById("nxt");
 
         function showImage(index) {
             images.forEach(id => {
-                if (c === Number(id.slice(1))) {
+                if (c === Number(id.slice(1)) || c2 === -Number(id.slice(1))) {
                     document.getElementById(id).style.transition = "0.3s";
                     document.getElementById(id).style.transform = "translateX(300%)";
                     if(c === 4) c++
@@ -136,12 +140,35 @@
                 }, 300)
             }, 300)
         }
+            function showRevImage(index) {
+            images.forEach(id => {
+                if (c === Number(id.slice(1)) || c2 === -Number(id.slice(1))) {
+                    document.getElementById(id).style.transition = "0.3s";
+                    document.getElementById(id).style.transform = "translateX(-300%)";
+                    if(c === 4) c++
+                }
+            })
+            setTimeout(() => {
+                images.forEach(id => {
+                    document.getElementById(id).style.display = "none";
+                });
+            }, 300)
+            setTimeout(() => {
+                document.getElementById(images[index]).style.transition = "0.3s";
+                document.getElementById(images[index]).style.display = "block";
+                document.getElementById(images[index]).style.transform = "translateX(300%)";
+                setTimeout(() => {
+                    document.getElementById(images[index]).style.transform = "translateX(0%)";
+                }, 300)
+            }, 300)
+        }
 
         prev.onclick = () => {
             current--;
-            c = current
+            if(c2 === -6) c2 = 0
+            c2--
             if (current < 0) current = images.length - 1;
-            showImage(current);
+            showRevImage(current);
         };
 
         next.onclick = () => {
@@ -150,7 +177,50 @@
             if (current >= images.length) current = 0;
             showImage(current);
         };
+    </script> -->
+
+    <script>
+        const images = ["i1", "i2", "i3", "i4", "i5"];
+        let current = 0;
+
+        const prev = document.getElementById("pre");
+        const next = document.getElementById("nxt");
+
+        function showImage(index, direction) {
+            images.forEach(id => {
+                const el = document.getElementById(id);
+                el.style.transition = "0.3s";
+                el.style.transform = `translateX(${direction * 300}%)`;
+            });
+
+            setTimeout(() => {
+                images.forEach(id => {
+                    document.getElementById(id).style.display = "none";
+                });
+
+                const currentImg = document.getElementById(images[index]);
+                currentImg.style.display = "block";
+                currentImg.style.transform = `translateX(${-direction * 300}%)`;
+
+                setTimeout(() => {
+                    currentImg.style.transform = "translateX(0%)";
+                }, 20);
+            }, 300);
+        }
+
+        prev.onclick = () => {
+            current--;
+            if (current < 0) current = images.length - 1;
+            showImage(current, -1); // slide RIGHT → LEFT
+        };
+
+        next.onclick = () => {
+            current++;
+            if (current >= images.length) current = 0;
+            showImage(current, 1); // slide LEFT → RIGHT
+        };
     </script>
+
 
 </body>
 
